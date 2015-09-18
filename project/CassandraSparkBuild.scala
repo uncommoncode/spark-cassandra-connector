@@ -121,6 +121,12 @@ object Artifacts {
     def guavaExclude: ModuleID =
       module exclude("com.google.guava", "guava")
 
+    def nettyExclude: ModuleID = module.guavaExclude
+      .exclude("io.netty", "netty-handler")
+      .exclude("io.netty", "netty-codec")
+      .exclude("io.netty", "netty-common")
+      .exclude("io.netty", "netty-buffer")
+
     def sparkExclusions: ModuleID = module.guavaExclude
       .exclude("org.apache.spark", s"spark-core_$scalaBinary")
 
@@ -144,7 +150,7 @@ object Artifacts {
   val akkaRemote          = "com.typesafe.akka"       %% "akka-remote"           % Akka           % "provided"  // ApacheV2
   val akkaSlf4j           = "com.typesafe.akka"       %% "akka-slf4j"            % Akka           % "provided"  // ApacheV2
   val cassandraClient     = "org.apache.cassandra"    % "cassandra-clientutil"   % Cassandra       guavaExclude // ApacheV2
-  val cassandraDriver     = "com.datastax.cassandra"  % "cassandra-driver-core"  % CassandraDriver guavaExclude // ApacheV2
+  val cassandraDriver     = "com.datastax.cassandra"  % "cassandra-driver-core"  % CassandraDriver nettyExclude // ApacheV2
   val commonsLang3        = "org.apache.commons"      % "commons-lang3"          % CommonsLang3                 // ApacheV2
   val config              = "com.typesafe"            % "config"                 % Config         % "provided"  // ApacheV2
   val guava               = "com.google.guava"        % "guava"                  % Guava
