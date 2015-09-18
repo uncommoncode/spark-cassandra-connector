@@ -84,7 +84,8 @@ object CassandraSparkBuild extends Build {
       libraryDependencies ++= (CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, minor)) if minor < 11 => Dependencies.kafka
         case _ => Seq.empty
-   }))).copy(base = demosPath / "kafka-streaming", dependencies = Seq(connector, embedded))
+       }))
+  ).copy(base = demosPath / "kafka-streaming", dependencies = Seq(connector, embedded))
 
   lazy val twitterStreaming = Project(
     id = "twitter-streaming",
